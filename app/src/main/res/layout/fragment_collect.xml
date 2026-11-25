@@ -211,48 +211,58 @@
                         android:layout_height="wrap_content" android:layout_marginTop="4dp"
                         android:text="@string/export_valid_hint" />
 
-                    <GridLayout
+                    <!-- 导出按钮：用嵌套 LinearLayout + weight 均分，兼容 Android 4.x（GridLayout 的 columnWeight 在部分 TV ROM 上失效导致按钮被撑出屏幕、文字截断） -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
-                        android:alignmentMode="alignMargins"
-                        android:columnCount="3"
-                        android:rowCount="3">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnM3u" style="@style/BtnOutline"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp" android:text="M3U" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnM3u8" style="@style/BtnOutline"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp" android:text="M3U8" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnTxt" style="@style/BtnOutline"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp" android:text="TXT" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnJson" style="@style/BtnOutline"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp" android:text="JSON" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnTvbox" style="@style/BtnOutline"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp" android:text="TVBox" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnXspf" style="@style/BtnOutline"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp" android:text="XSPF" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCsv" style="@style/BtnOutline"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp" android:text="CSV" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnChooseDir" style="@style/BtnPrimary"
-                            android:layout_width="0dp" android:layout_columnWeight="1"
-                            android:layout_margin="3dp"
-                            android:text="@string/choose_dir" />
-                    </GridLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnM3u" style="@style/ExportButton"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="M3U" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnM3u8" style="@style/ExportButton"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="M3U8" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnTxt" style="@style/ExportButton"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="TXT" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnJson" style="@style/ExportButton"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="JSON" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnTvbox" style="@style/ExportButton"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="TVBox" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnXspf" style="@style/ExportButton"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="XSPF" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCsv" style="@style/ExportButton"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="CSV" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnChooseDir" style="@style/ExportButtonAccent"
+                                android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:text="@string/choose_dir" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvDir"

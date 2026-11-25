@@ -60,6 +60,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var trackSelector: DefaultTrackSelector
     private lateinit var httpFactory: DefaultHttpDataSource.Factory
     private lateinit var drawer: DrawerLayout
+    private lateinit var recyclerDrawer: RecyclerView
     private lateinit var adapter: ChannelAdapter
     private lateinit var tvTitle: TextView
     private lateinit var tvTime: TextView
@@ -136,6 +137,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun findViews() {
         playerView = findViewById(R.id.playerView)
         drawer = findViewById(R.id.drawer)
+        recyclerDrawer = findViewById(R.id.recyclerDrawer)
         tvTitle = findViewById(R.id.tvTitle)
         tvTime = findViewById(R.id.tvTime)
         tvCenterHint = findViewById(R.id.tvCenterHint)
@@ -146,15 +148,16 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun setupDrawer() {
-        val recycler = findViewById<RecyclerView>(R.id.recyclerDrawer)
         adapter = ChannelAdapter(channels.toMutableList(), onPlay = { ch ->
             currentIndex = channels.indexOfFirst { it.url == ch.url && it.name == ch.name }.coerceAtLeast(0)
             playCurrent()
-            drawer.closeDrawers()
+            closeChannelDrawer()
         })
         adapter.darkTheme = true
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = adapter
+        // 抽屉里隐藏删除按钮，避免遥控器误删；频道列表专注选台
+        adapter.hideDelete = true
+        recyclerDrawer.layoutManager = LinearLayoutManager(this)
+        recyclerDrawer.adapter = adapter
 
         val etSearch = findViewById<EditText>(R.id.etChannelSearch)
         etSearch.addTextChangedListener(object : android.text.TextWatcher {
@@ -165,7 +168,13 @@ class PlayerActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
             override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
         })
-        findViewById<View>(R.id.btnCloseDrawer).setOnClickListener { drawer.closeDrawers() }
+        findViewById<View>(R.id.btnCloseDrawer).setOnClickListener { closeChannelDrawer() }
+        // 抽屉内的频道卡片支持确定键（ENTER/DPAD_CENTER）直接换台，与点击等价
+        adapter.onConfirm = { ch ->
+            currentIndex = channels.indexOfFirst { it.url == ch.url && it.name == ch.name }.coerceAtLeast(0)
+            playCurrent()
+            closeChannelDrawer()
+        }
     }
 
     private fun setupPlayer() {
@@ -383,7 +392,20 @@ class PlayerActivity : AppCompatActivity() {
 
     /** 处理遥控器按键，返回 true 表示已消费 */
     private fun handleRemoteKey(code: Int): Boolean {
+        // 频道抽屉打开时：方向键/确定键交给抽屉内的频道列表做焦点导航，让用户自行选台
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            when (code) {
+                KeyEvent.KEYCODE_BACK, KeyEvent.KEYCODE_ESCAPE -> { closeChannelDrawer(); return true }
+                KeyEvent.KEYCODE_MENU -> { closeChannelDrawer(); return true }
+                // 其余按键（方向键、确定键、数字键）交给系统分发到抽屉内获得焦点的频道卡片
+                else -> return false
+            }
+        }
         when (code) {
+            // 确定键 / 遥控器 OK 键：弹出频道列表供用户选择换台
+            KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_NUMPAD_ENTER -> {
+                openChannelDrawer(); return true
+            }
             KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, KeyEvent.KEYCODE_MEDIA_PLAY, KeyEvent.KEYCODE_MEDIA_PAUSE -> {
                 togglePlay(); showControlsTemporarily(); return true
             }
@@ -401,10 +423,9 @@ class PlayerActivity : AppCompatActivity() {
             KeyEvent.KEYCODE_DPAD_DOWN -> { adjustVolume(-1); return true }
             KeyEvent.KEYCODE_MENU -> { showMoreMenu(); return true }
             KeyEvent.KEYCODE_INFO, KeyEvent.KEYCODE_GUIDE -> { showChannelInfo(); return true }
-            KeyEvent.KEYCODE_BACK -> {
-                if (drawer.isDrawerOpen(GravityCompat.START)) { drawer.closeDrawers(); return true }
-                if (controlsVisible) { hideControls(); return true }
-                finish(); return true
+            KeyEvent.KEYCODE_BACK, KeyEvent.KEYCODE_ESCAPE -> {
+                // 返回键：直接退回频道列表主页面
+                returnToLibrary(); return true
             }
             in KeyEvent.KEYCODE_0..KeyEvent.KEYCODE_9 -> {
                 val digit = code - KeyEvent.KEYCODE_0
@@ -421,6 +442,34 @@ class PlayerActivity : AppCompatActivity() {
             }
         }
         return false
+    }
+
+    /** 打开频道抽屉，并把焦点交给当前正在播放的频道卡片，方便遥控器直接选台 */
+    private fun openChannelDrawer() {
+        if (locked) {
+            Toast.makeText(this, "屏幕已锁定，请先按菜单键解锁", Toast.LENGTH_SHORT).show()
+            return
+        }
+        showControls()
+        drawer.openDrawer(GravityCompat.START)
+        // 定位并聚焦当前频道，遥控器上下移动即可选台、确定键换台
+        recyclerDrawer.post {
+            val pos = currentIndex.coerceIn(0, channels.size - 1)
+            recyclerDrawer.scrollToPosition(pos)
+            recyclerDrawer.findViewHolderForAdapterPosition(pos)?.itemView?.requestFocus()
+                ?: findViewById<View>(R.id.etChannelSearch).requestFocus()
+        }
+    }
+
+    private fun closeChannelDrawer() {
+        drawer.closeDrawers()
+        btnPlayPause.requestFocus()
+    }
+
+    /** 退回频道列表主页面：通知 MainActivity 定位到频道页后结束播放器 */
+    private fun returnToLibrary() {
+        Prefs.putBool(this, Prefs.KEY_RETURN_TO_LIBRARY, true)
+        finish()
     }
 
     private fun jumpToChannel(number: Int) {

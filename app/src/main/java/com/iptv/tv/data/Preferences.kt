@@ -94,4 +94,5 @@ object Prefs {
     const val KEY_LAST_PLAYED = "last_played"
     const val KEY_PLAY_POSITION = "play_position"
     const val KEY_UA = "user_agent"
+    const val KEY_RETURN_TO_LIBRARY = "return_to_library"   // 播放器返回后定位到频道列表页
 }

@@ -21,6 +21,10 @@ class ChannelAdapter(
 ) : RecyclerView.Adapter<ChannelAdapter.VH>() {
 
     var darkTheme = false
+    /** 隐藏删除按钮（播放器抽屉选台场景，避免误删） */
+    var hideDelete = false
+    /** 遥控器确定键回调（播放器抽屉选台用，与点击等价） */
+    var onConfirm: ((Channel) -> Unit)? = null
     /** 管理模式：显示勾选框、隐藏播放/删除按钮，点击条目切换勾选 */
     private var manageMode = false
     private val selected = mutableSetOf<String>()
@@ -36,6 +40,21 @@ class ChannelAdapter(
                     .setInterpolator(AccelerateDecelerateInterpolator())
                     .start()
                 view.elevation = if (hasFocus) 8f else 0f
+            }
+            // 遥控器确定键：焦点在卡片上时直接触发选台/播放
+            v.setOnKeyListener { view, keyCode, event ->
+                if (event.action == android.view.KeyEvent.ACTION_DOWN &&
+                    (keyCode == android.view.KeyEvent.KEYCODE_ENTER ||
+                     keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER ||
+                     keyCode == android.view.KeyEvent.KEYCODE_NUMPAD_ENTER)
+                ) {
+                    val pos = bindingAdapterPosition
+                    if (pos != RecyclerView.NO_POSITION && pos < items.size) {
+                        onConfirm?.invoke(items[pos]) ?: view.performClick()
+                        return@setOnKeyListener true
+                    }
+                }
+                false
             }
         }
         val name: TextView = v.findViewById(R.id.tvName)
@@ -90,7 +109,7 @@ class ChannelAdapter(
         // 管理模式：显示勾选框，隐藏播放/删除按钮；普通模式反之
         holder.keep.visibility = if (manageMode) View.VISIBLE else View.GONE
         holder.play.visibility = if (manageMode) View.GONE else View.VISIBLE
-        holder.del.visibility = if (manageMode) View.GONE else View.VISIBLE
+        holder.del.visibility = if (manageMode || hideDelete) View.GONE else View.VISIBLE
         holder.keep.setOnCheckedChangeListener(null)
         holder.keep.isChecked = selected.contains(ch.identity)
         holder.keep.setOnCheckedChangeListener { _, checked ->

@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -46,6 +47,8 @@ class LibraryFragment : Fragment() {
     private lateinit var chipOrigins: ChipGroup
     private lateinit var adapter: ChannelAdapter
     private lateinit var emptyState: View
+    private lateinit var tvEmptyHint: TextView
+    private lateinit var btnClearFilter: MaterialButton
     private var allChannels: List<Channel> = emptyList()
     private var visibleChannels: List<Channel> = emptyList()
     private var currentGroup = "全部"
@@ -59,6 +62,16 @@ class LibraryFragment : Fragment() {
         chipGroups = v.findViewById(R.id.chipGroups)
         chipOrigins = v.findViewById(R.id.chipOrigins)
         emptyState = v.findViewById(R.id.emptyState)
+        tvEmptyHint = v.findViewById(R.id.tvEmptyHint)
+        btnClearFilter = v.findViewById(R.id.btnClearFilter)
+        btnClearFilter.setOnClickListener {
+            currentOrigin = "all"
+            currentGroup = "全部"
+            etSearch.setText("")
+            buildOriginChips()
+            buildChips()
+            filter()
+        }
 
         adapter = ChannelAdapter(
             mutableListOf(),
@@ -205,7 +218,20 @@ class LibraryFragment : Fragment() {
         }
         visibleChannels = list
         adapter.submit(list)
-        emptyState.visibility = if (allChannels.isEmpty()) View.VISIBLE else View.GONE
+        // 空状态区分：完全没有频道 vs 当前筛选无匹配（后者提供一键清除筛选）
+        val filtering = currentOrigin != "all" || currentGroup != "全部" || q.isNotBlank()
+        if (list.isEmpty()) {
+            emptyState.visibility = View.VISIBLE
+            if (allChannels.isEmpty()) {
+                tvEmptyHint.setText(R.string.empty_state_hint)
+                btnClearFilter.visibility = View.GONE
+            } else {
+                tvEmptyHint.setText(R.string.empty_filter_hint)
+                btnClearFilter.visibility = if (filtering) View.VISIBLE else View.GONE
+            }
+        } else {
+            emptyState.visibility = View.GONE
+        }
     }
 
     private fun showChannelMenu(ch: Channel) {

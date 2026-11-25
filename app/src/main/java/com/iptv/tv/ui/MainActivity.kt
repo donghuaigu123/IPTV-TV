@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.iptv.tv.BuildConfig
 import com.iptv.tv.R
+import com.iptv.tv.data.Prefs
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +31,25 @@ class MainActivity : AppCompatActivity() {
         navLibrary.setOnClickListener { switchTo(1) }
         navSettings.setOnClickListener { switchTo(2) }
 
-        switchTo(0)
-        navCollect.post { navCollect.requestFocus() }
+        // 从播放器返回时定位到频道列表页
+        val initialTab = if (Prefs.getBool(this, Prefs.KEY_RETURN_TO_LIBRARY, false)) {
+            Prefs.putBool(this, Prefs.KEY_RETURN_TO_LIBRARY, false)
+            1
+        } else 0
+        switchTo(initialTab)
+        navCollect.post {
+            (if (initialTab == 1) navLibrary else navCollect).requestFocus()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 播放器在后台设置返回标志后，回到主界面时切到频道页
+        if (Prefs.getBool(this, Prefs.KEY_RETURN_TO_LIBRARY, false)) {
+            Prefs.putBool(this, Prefs.KEY_RETURN_TO_LIBRARY, false)
+            switchTo(1)
+            navLibrary.requestFocus()
+        }
     }
 
     /** 遥控器：数字键 1/2/3 快速切页；返回键双击退出 */
