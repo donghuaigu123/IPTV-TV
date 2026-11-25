@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 中等屏幕：可用宽度 >= 960dp（典型 1080p 电视 density=2.0） -->
+<resources>
+    <dimen name="nav_width">190dp</dimen>
+    <dimen name="nav_padding">14dp</dimen>
+    <dimen name="nav_icon">44dp</dimen>
+    <dimen name="nav_btn_height">62dp</dimen>
+    <dimen name="nav_text">16sp</dimen>
+    <dimen name="brand_icon">48dp</dimen>
+    <dimen name="brand_text">21sp</dimen>
+    <dimen name="hint_text">12sp</dimen>
+
+    <dimen name="drawer_width">420dp</dimen>
+    <dimen name="player_icon">52dp</dimen>
+    <dimen name="player_play_icon">60dp</dimen>
+    <dimen name="player_title">19sp</dimen>
+    <dimen name="player_hint">13sp</dimen>
+    <dimen name="player_bar_padding">16dp</dimen>
+    <dimen name="drawer_title">19sp</dimen>
+    <dimen name="drawer_padding">16dp</dimen>
+
+    <dimen name="grid_min_width">340dp</dimen>
+    <dimen name="card_logo">50dp</dimen>
+    <dimen name="card_name">19sp</dimen>
+    <dimen name="card_meta">13sp</dimen>
+    <dimen name="card_url">12sp</dimen>
+    <dimen name="card_padding_h">14dp</dimen>
+    <dimen name="card_padding_v">11dp</dimen>
+    <dimen name="card_btn">48dp</dimen>
+    <dimen name="card_margin">12dp</dimen>
+    <dimen name="card_radius">18dp</dimen>
+
+    <dimen name="btn_height">56dp</dimen>
+    <dimen name="btn_text">17sp</dimen>
+    <dimen name="section_text">18sp</dimen>
+    <dimen name="caption_text">14sp</dimen>
+
+    <dimen name="dialog_input">16sp</dimen>
+    <dimen name="dialog_padding">18dp</dimen>
+    <dimen name="title_text">24sp</dimen>
+</resources>

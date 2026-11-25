@@ -6,13 +6,13 @@
     android:orientation="horizontal"
     android:background="@color/background">
 
-    <!-- 左侧导航栏（TV 大屏） -->
+    <!-- 左侧导航栏：宽度随屏幕分档，内容区用 weight 弹性填充 -->
     <LinearLayout
-        android:layout_width="220dp"
+        android:layout_width="@dimen/nav_width"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/surface"
-        android:padding="16dp">
+        android:padding="@dimen/nav_padding">
 
         <!-- 品牌 -->
         <LinearLayout
@@ -24,12 +24,12 @@
             android:paddingBottom="20dp">
 
             <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/brand_icon"
+                android:layout_height="@dimen/brand_icon"
                 android:background="@drawable/bg_card_soft">
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="@dimen/nav_icon"
+                    android:layout_height="@dimen/nav_icon"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_play"
                     app:tint="@color/accent" />
@@ -41,7 +41,7 @@
                 android:layout_marginStart="10dp"
                 android:text="@string/app_name"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"
+                android:textSize="@dimen/brand_text"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:id="@+id/navCollect"
             style="@style/TvNavButton"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="@dimen/nav_btn_height"
             android:text="①  采集中心"
             app:icon="@drawable/ic_list"
             app:iconTint="@color/tv_nav_text" />
@@ -59,7 +59,7 @@
             android:id="@+id/navLibrary"
             style="@style/TvNavButton"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="@dimen/nav_btn_height"
             android:layout_marginTop="10dp"
             android:text="②  频道列表"
             app:icon="@drawable/ic_play"
@@ -69,7 +69,7 @@
             android:id="@+id/navSettings"
             style="@style/TvNavButton"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="@dimen/nav_btn_height"
             android:layout_marginTop="10dp"
             android:text="③  系统设置"
             app:icon="@drawable/ic_more"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/text_hint"
-            android:textSize="12sp" />
+            android:textSize="@dimen/hint_text" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,10 +93,10 @@
             android:gravity="center"
             android:text="数字键 1/2/3 快速切换\n方向键移动 · 确认键选择"
             android:textColor="@color/text_hint"
-            android:textSize="10sp" />
+            android:textSize="@dimen/hint_text" />
     </LinearLayout>
 
-    <!-- 右侧内容区 -->
+    <!-- 右侧内容区：占据剩余全部宽度，自动适应任意屏宽 -->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="0dp"

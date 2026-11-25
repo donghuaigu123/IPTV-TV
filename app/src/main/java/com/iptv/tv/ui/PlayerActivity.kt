@@ -3,7 +3,6 @@ package com.iptv.tv.ui
 import android.annotation.SuppressLint
 import android.app.PictureInPictureParams
 import android.content.Context
-import android.content.pm.ActivityInfo
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
@@ -675,10 +674,18 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * TV 端始终锁定横屏（Manifest 中 screenOrientation=landscape）。
+     * 「全屏」键改为切换控制栏显隐的沉浸模式，避免切到竖屏导致画面/焦点错乱。
+     */
     private fun toggleFullscreen() {
-        requestedOrientation = if (resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT)
-            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        if (controlsVisible) {
+            handler.removeCallbacks(hideControlsTask)
+            hideControls()
+            Toast.makeText(this, "沉浸模式：按菜单键或全屏键显示控制栏", Toast.LENGTH_SHORT).show()
+        } else {
+            showControlsTemporarily()
+        }
     }
 
     override fun onPictureInPictureModeChanged(isInPic: Boolean) {

@@ -14,7 +14,7 @@
 
         <TextView style="@style/TextSection"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="@string/tab_settings" android:textSize="20sp" />
+            android:text="@string/tab_settings" android:textSize="@dimen/brand_text" />
 
         <!-- 下载目录 -->
         <com.google.android.material.card.MaterialCardView
@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content" android:text="@string/download_dir" />
                 <TextView android:id="@+id/tvDir" android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:layout_marginTop="8dp"
-                    android:textColor="@color/text_secondary" android:textSize="12sp" />
+                    android:textColor="@color/text_secondary" android:textSize="@dimen/card_meta" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnChooseDir" style="@style/BtnOutline"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginTop="14dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                        android:text="@string/timeout" android:textColor="@color/text_primary" android:textSize="14sp" />
+                        android:text="@string/timeout" android:textColor="@color/text_primary" android:textSize="@dimen/caption_text" />
                     <EditText android:id="@+id/etTimeout" android:layout_width="70dp" android:layout_height="wrap_content"
                         android:background="@drawable/bg_edittext" android:gravity="center"
                         android:inputType="number" android:padding="8dp"
@@ -58,7 +58,7 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginTop="10dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                        android:text="@string/concurrency" android:textColor="@color/text_primary" android:textSize="14sp" />
+                        android:text="@string/concurrency" android:textColor="@color/text_primary" android:textSize="@dimen/caption_text" />
                     <EditText android:id="@+id/etConcurrency" android:layout_width="70dp" android:layout_height="wrap_content"
                         android:background="@drawable/bg_edittext" android:gravity="center"
                         android:inputType="number" android:padding="8dp"
@@ -94,7 +94,7 @@
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="14dp" android:text="@string/decoder"
-                    android:textColor="@color/text_primary" android:textSize="14sp" />
+                    android:textColor="@color/text_primary" android:textSize="@dimen/caption_text" />
                 <Spinner android:id="@+id/spDecoder" android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:layout_marginTop="6dp"
                     android:background="@drawable/bg_edittext"
@@ -102,7 +102,7 @@
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="12dp" android:text="@string/buffer_mode"
-                    android:textColor="@color/text_primary" android:textSize="14sp" />
+                    android:textColor="@color/text_primary" android:textSize="@dimen/caption_text" />
                 <Spinner android:id="@+id/spBuffer" android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:layout_marginTop="6dp"
                     android:background="@drawable/bg_edittext"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content" android:text="@string/about" />
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginTop="8dp" android:text="@string/about_text"
-                    android:textColor="@color/text_secondary" android:textSize="12sp"
+                    android:textColor="@color/text_secondary" android:textSize="@dimen/card_meta"
                     android:lineSpacingExtra="4dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

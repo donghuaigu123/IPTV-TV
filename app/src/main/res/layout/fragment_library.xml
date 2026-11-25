@@ -28,7 +28,7 @@
 
                 <TextView style="@style/TextSection"
                     android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                    android:text="@string/tab_library" android:textSize="20sp" />
+                    android:text="@string/tab_library" android:textSize="@dimen/brand_text" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRecycle"
@@ -82,7 +82,7 @@
                 android:layout_marginTop="6dp"
                 android:text="@string/import_tips"
                 android:textColor="@color/text_hint"
-                android:textSize="11sp" />
+                android:textSize="@dimen/card_url" />
 
             <EditText
                 android:id="@+id/etSearch"
@@ -98,7 +98,7 @@
                 android:singleLine="true"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_hint"
-                android:textSize="14sp" />
+                android:textSize="@dimen/caption_text" />
 
             <!-- 来源筛选：按来源大类 + 订阅实例切换显示 -->
             <HorizontalScrollView
@@ -206,7 +206,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/empty_state_hint"
                     android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/caption_text" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

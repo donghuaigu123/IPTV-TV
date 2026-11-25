@@ -69,9 +69,10 @@ class LibraryFragment : Fragment() {
             onLongClick = { ch -> showChannelMenu(ch) },
             onDelete = { ch -> confirmDelete(ch) }
         )
-        // TV 横屏：两列网格，遥控器左右/上下移动更自然，一屏可浏览更多频道
+        // TV 横屏：网格列数按可用宽度动态计算，小盒子 2 列、大屏电视最多 6 列
         recycler.layoutManager = GridLayoutManager(requireContext(), 2)
         recycler.adapter = adapter
+        recycler.post { updateSpanCount() }
 
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) { filter() }
@@ -101,6 +102,28 @@ class LibraryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         reload()
+        if (::recycler.isInitialized) recycler.post { updateSpanCount() }
+    }
+
+    /**
+     * 按 RecyclerView 实际可用宽度与卡片最小宽度动态计算列数。
+     * 优先使用测量后的真实宽度；未测量时用「屏宽 - 导航宽度」估算。
+     * 列数限制在 2~6，避免卡片过窄（遥控器难聚焦）或过宽（浪费大屏空间）。
+     */
+    private fun updateSpanCount() {
+        if (!::recycler.isInitialized || context == null) return
+        val minWidth = resources.getDimensionPixelSize(R.dimen.grid_min_width)
+        val available = if (recycler.width > 0) {
+            recycler.width
+        } else {
+            val dm = resources.displayMetrics
+            (dm.widthPixels - resources.getDimensionPixelSize(R.dimen.nav_width))
+                .coerceAtLeast(minWidth)
+        }
+        val span = (available / minWidth).coerceIn(2, 6)
+        (recycler.layoutManager as? GridLayoutManager)?.let { lm ->
+            if (lm.spanCount != span) lm.spanCount = span
+        }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {

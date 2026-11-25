@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  自适应尺寸基准档（可用宽度 < 960dp，典型小型电视盒子 720p）
+  更大屏幕由 values-w960dp / values-w1280dp / values-w1600dp 覆盖。
+  所有布局硬编码尺寸都应引用此处的 dimen，禁止写死 dp/sp。
+-->
+<resources>
+    <!-- 左侧导航栏 -->
+    <dimen name="nav_width">168dp</dimen>
+    <dimen name="nav_padding">12dp</dimen>
+    <dimen name="nav_icon">40dp</dimen>
+    <dimen name="nav_btn_height">56dp</dimen>
+    <dimen name="nav_text">15sp</dimen>
+    <dimen name="brand_icon">44dp</dimen>
+    <dimen name="brand_text">19sp</dimen>
+    <dimen name="hint_text">11sp</dimen>
+
+    <!-- 播放器 -->
+    <dimen name="drawer_width">340dp</dimen>
+    <dimen name="player_icon">48dp</dimen>
+    <dimen name="player_play_icon">56dp</dimen>
+    <dimen name="player_title">18sp</dimen>
+    <dimen name="player_hint">12sp</dimen>
+    <dimen name="player_bar_padding">14dp</dimen>
+    <dimen name="drawer_title">18sp</dimen>
+    <dimen name="drawer_padding">14dp</dimen>
+
+    <!-- 频道卡片 / 网格 -->
+    <dimen name="grid_min_width">300dp</dimen>
+    <dimen name="card_logo">46dp</dimen>
+    <dimen name="card_name">17sp</dimen>
+    <dimen name="card_meta">12sp</dimen>
+    <dimen name="card_url">11sp</dimen>
+    <dimen name="card_padding_h">12dp</dimen>
+    <dimen name="card_padding_v">10dp</dimen>
+    <dimen name="card_btn">44dp</dimen>
+    <dimen name="card_margin">10dp</dimen>
+    <dimen name="card_radius">16dp</dimen>
+
+    <!-- 通用按钮与文字（供 styles.xml 引用） -->
+    <dimen name="btn_height">52dp</dimen>
+    <dimen name="btn_text">16sp</dimen>
+    <dimen name="section_text">17sp</dimen>
+    <dimen name="caption_text">13sp</dimen>
+
+    <!-- 对话框 -->
+    <dimen name="dialog_input">15sp</dimen>
+    <dimen name="dialog_padding">16dp</dimen>
+    <dimen name="title_text">22sp</dimen>
+</resources>

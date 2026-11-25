@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:text="@string/tvbox_tips"
             android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            android:textSize="@dimen/caption_text" />
     </LinearLayout>
 
     <EditText

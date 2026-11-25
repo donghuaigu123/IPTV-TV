@@ -13,8 +13,8 @@ android {
         minSdk = 19
         // 保持较低 targetSdk，兼容老设备的存储与权限行为
         targetSdk = 28
-        versionCode = 1
-        versionName = "1.0.0-tv"
+        versionCode = 2
+        versionName = "1.1.0-tv"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
     }

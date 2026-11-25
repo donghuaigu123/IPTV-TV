@@ -35,10 +35,10 @@
                         android:layout_weight="1" android:gravity="center" android:orientation="vertical">
                         <TextView android:id="@+id/tvStatChannels" android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:text="0" android:textColor="@color/accent"
-                            android:textSize="24sp" android:textStyle="bold" />
+                            android:textSize="@dimen/title_text" android:textStyle="bold" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                             android:layout_marginTop="2dp" android:text="@string/collected_channels"
-                            android:textColor="@color/text_secondary" android:textSize="11sp" />
+                            android:textColor="@color/text_secondary" android:textSize="@dimen/card_url" />
                     </LinearLayout>
 
                     <View android:layout_width="1dp" android:layout_height="40dp" android:background="@color/divider" />
@@ -47,10 +47,10 @@
                         android:layout_weight="1" android:gravity="center" android:orientation="vertical">
                         <TextView android:id="@+id/tvStatOk" android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:text="0" android:textColor="@color/success"
-                            android:textSize="24sp" android:textStyle="bold" />
+                            android:textSize="@dimen/title_text" android:textStyle="bold" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                             android:layout_marginTop="2dp" android:text="@string/available_channels"
-                            android:textColor="@color/text_secondary" android:textSize="11sp" />
+                            android:textColor="@color/text_secondary" android:textSize="@dimen/card_url" />
                     </LinearLayout>
 
                     <View android:layout_width="1dp" android:layout_height="40dp" android:background="@color/divider" />
@@ -59,10 +59,10 @@
                         android:layout_weight="1" android:gravity="center" android:orientation="vertical">
                         <TextView android:id="@+id/tvStatSources" android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:text="0" android:textColor="@color/brand_light"
-                            android:textSize="24sp" android:textStyle="bold" />
+                            android:textSize="@dimen/title_text" android:textStyle="bold" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                             android:layout_marginTop="2dp" android:text="@string/total_sources"
-                            android:textColor="@color/text_secondary" android:textSize="11sp" />
+                            android:textColor="@color/text_secondary" android:textSize="@dimen/card_url" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -120,7 +120,7 @@
                         android:layout_marginTop="14dp"
                         android:text="@string/collect_hint"
                         android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/card_meta" />
 
                     <ProgressBar
                         android:id="@+id/progressBar"
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/text_primary"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/caption_text"
                         android:textStyle="bold" />
 
                     <com.google.android.material.button.MaterialButton
@@ -260,7 +260,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/text_hint"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/card_url" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
