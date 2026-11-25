@@ -1,0 +1,5 @@
+-keepattributes *Annotation*
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn androidx.media3.**
+-keep class com.iptv.app.model.** { *; }

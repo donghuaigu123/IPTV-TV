@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 统计卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/CardSurface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:id="@+id/tvStatChannels" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0" android:textColor="@color/accent"
+                            android:textSize="24sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp" android:text="@string/collected_channels"
+                            android:textColor="@color/text_secondary" android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <View android:layout_width="1dp" android:layout_height="40dp" android:background="@color/divider" />
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:id="@+id/tvStatOk" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0" android:textColor="@color/success"
+                            android:textSize="24sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp" android:text="@string/available_channels"
+                            android:textColor="@color/text_secondary" android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <View android:layout_width="1dp" android:layout_height="40dp" android:background="@color/divider" />
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:id="@+id/tvStatSources" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0" android:textColor="@color/brand_light"
+                            android:textSize="24sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp" android:text="@string/total_sources"
+                            android:textColor="@color/text_secondary" android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 主操作卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/CardSurface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView style="@style/TextSection"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/start_collect" />
+
+                    <TextView style="@style/TextCaption"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="从 20+ 公开源全网采集，自动去重整理" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCollect"
+                            style="@style/BtnPrimary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/start_collect" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCheck"
+                            style="@style/BtnOutline"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/check_sources" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="@string/collect_hint"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="8dp"
+                        android:max="100"
+                        android:progressTint="@color/accent"
+                        android:progressBackgroundTint="@color/surface_3" />
+
+                    <TextView
+                        android:id="@+id/tvSummary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDiagnosis"
+                        style="@style/BtnOutline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/view_diagnosis" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 数据源管理卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/CardSurface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView style="@style/TextSection" android:layout_width="0dp"
+                            android:layout_height="wrap_content" android:layout_weight="1"
+                            android:text="@string/source_manager" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddSource" style="@style/BtnText"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/add_source" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerSources"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:nestedScrollingEnabled="false"
+                        android:minHeight="100dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnResetSources"
+                        style="@style/BtnText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reset_sources" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 导出卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/CardSurface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView style="@style/TextSection" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="@string/export" />
+                    <TextView style="@style/TextCaption" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:text="@string/export_valid_hint" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:alignmentMode="alignMargins"
+                        android:columnCount="3"
+                        android:rowCount="3">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnM3u" style="@style/BtnOutline"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp" android:text="M3U" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnM3u8" style="@style/BtnOutline"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp" android:text="M3U8" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTxt" style="@style/BtnOutline"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp" android:text="TXT" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnJson" style="@style/BtnOutline"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp" android:text="JSON" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTvbox" style="@style/BtnOutline"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp" android:text="TVBox" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnXspf" style="@style/BtnOutline"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp" android:text="XSPF" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCsv" style="@style/BtnOutline"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp" android:text="CSV" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnChooseDir" style="@style/BtnPrimary"
+                            android:layout_width="0dp" android:layout_columnWeight="1"
+                            android:layout_margin="3dp"
+                            android:text="@string/choose_dir" />
+                    </GridLayout>
+
+                    <TextView
+                        android:id="@+id/tvDir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_hint"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

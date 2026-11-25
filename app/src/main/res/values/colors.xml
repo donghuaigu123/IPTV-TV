@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 品牌色：靛蓝 → 青，现代流媒体风格 -->
+    <color name="brand">#FF6366F1</color>
+    <color name="brand_light">#FF818CF8</color>
+    <color name="brand_deep">#FF4F46E5</color>
+    <color name="accent">#FF22D3EE</color>
+    <color name="accent_deep">#FF06B6D4</color>
+
+    <!-- 背景层级 -->
+    <color name="background">#FF0B1120</color>
+    <color name="surface">#FF151E32</color>
+    <color name="surface_2">#FF1E293B</color>
+    <color name="surface_3">#FF273449</color>
+    <color name="divider">#FF2A3548</color>
+
+    <!-- 文字 -->
+    <color name="text_primary">#FFF1F5F9</color>
+    <color name="text_secondary">#FF94A3B8</color>
+    <color name="text_hint">#FF64748B</color>
+
+    <!-- 语义色 -->
+    <color name="success">#FF34D399</color>
+    <color name="error">#FFF87171</color>
+    <color name="warning">#FFFBBF24</color>
+    <color name="green">#FF34D399</color>
+    <color name="red">#FFF87171</color>
+
+    <!-- 播放器 -->
+    <color name="player_bg">#FF000000</color>
+
+    <!-- 保留兼容旧引用 -->
+    <color name="primary">#FF6366F1</color>
+    <color name="primary_dark">#FF4F46E5</color>
+    <color name="ic_launcher_background">#FF4F46E5</color>
+</resources>

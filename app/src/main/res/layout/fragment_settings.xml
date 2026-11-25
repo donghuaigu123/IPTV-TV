@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingBottom="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView style="@style/TextSection"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/tab_settings" android:textSize="20sp" />
+
+        <!-- 下载目录 -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardSurface"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="14dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp">
+                <TextView style="@style/TextSection" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/download_dir" />
+                <TextView android:id="@+id/tvDir" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                    android:textColor="@color/text_secondary" android:textSize="12sp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnChooseDir" style="@style/BtnOutline"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" android:text="@string/choose_dir" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 检测设置 -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardSurface"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="14dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp">
+                <TextView style="@style/TextSection" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/check_settings" />
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginTop="14dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="@string/timeout" android:textColor="@color/text_primary" android:textSize="14sp" />
+                    <EditText android:id="@+id/etTimeout" android:layout_width="70dp" android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edittext" android:gravity="center"
+                        android:inputType="number" android:padding="8dp"
+                        android:text="8" android:textColor="@color/text_primary" />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginTop="10dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="@string/concurrency" android:textColor="@color/text_primary" android:textSize="14sp" />
+                    <EditText android:id="@+id/etConcurrency" android:layout_width="70dp" android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edittext" android:gravity="center"
+                        android:inputType="number" android:padding="8dp"
+                        android:text="24" android:textColor="@color/text_primary" />
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swAutoCheck" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                    android:text="@string/auto_check" android:textColor="@color/text_primary" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swPurgeInvalid" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                    android:text="@string/purge_invalid" android:textColor="@color/text_primary" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swRetainDup" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                    android:text="@string/retain_duplicate" android:textColor="@color/text_primary" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 播放器设置 -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardSurface"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="14dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp">
+                <TextView style="@style/TextSection" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/player_settings" />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp" android:text="@string/decoder"
+                    android:textColor="@color/text_primary" android:textSize="14sp" />
+                <Spinner android:id="@+id/spDecoder" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_edittext"
+                    android:entries="@array/decoder_entries" android:padding="10dp" />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" android:text="@string/buffer_mode"
+                    android:textColor="@color/text_primary" android:textSize="14sp" />
+                <Spinner android:id="@+id/spBuffer" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_edittext"
+                    android:entries="@array/buffer_entries" android:padding="10dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveSettings"
+            style="@style/BtnPrimary"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/ok" />
+
+        <!-- 关于 -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardSurface"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="14dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp">
+                <TextView style="@style/TextSection" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/about" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" android:text="@string/about_text"
+                    android:textColor="@color/text_secondary" android:textSize="12sp"
+                    android:lineSpacingExtra="4dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
